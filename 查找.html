@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 查找135到145之间是否存在整除45的数
+        // let min = 135, max = 200
+        // for(var i = min; i<max;i++){
+        // i % 45 === 0 ? console.log("存在", i): console.log("不存在", i)
+        // }
+
+        // let isFind = false;
+        // for (var i =min; i < max; i++) {
+        //     if(i % 45 === 0){
+        //         isFind = true;
+        //         console.log(i)
+        //     }
+        // }
+        // if(isFind){
+        //     console.log("存在")
+        // }else{
+        //     console.log("不存在")
+        // }
+
+        console.log("游戏开始")
+        let pcPunch = "", round = 1, playerScore = 0, pcScore = 0;
+        while (true) {
+            console.log(`==============第${round}轮==============`)
+            console.log(`系统: ${pcScore}分, 玩家: ${playerScore}分`)
+            let playerPunch = prompt("请出拳（剪刀石头布）")
+            round++
+
+            if (playerPunch === null) {
+                break
+            }
+
+            if (playerPunch !== "剪刀" && playerPunch !== "石头" && playerPunch !== "布") {
+                console.log("出拳无效，请重新出拳")
+                continue;
+            }
+
+            // 开始判断输赢
+            let randomNumber = Math.random();
+            if (randomNumber < 0.3333) {
+                pcPunch = "剪刀"
+            } else if (randomNumber > 0.3333 && randomNumber < 0.6666) {
+                pcPunch = "石头"
+            } else {
+                pcPunch = "布"
+            }
+
+            console.log(`玩家出拳: ${playerPunch}`)
+            console.log(`系统出拳: ${pcPunch}`)
+
+            if (playerPunch === "剪刀" && pcPunch === "布" || playerPunch === "石头" && pcPunch === "剪刀" || playerPunch === "布" && pcPunch === "石头") {
+                playerScore++
+                console.log("玩家胜利")
+            } else if (pcPunch === playerPunch) {
+                console.log("平局")
+            } else {
+                pcScore++
+                console.log("系统胜利")
+            }
+        }
+
+        console.log("==============游戏结束=============")
+        console.log(`系统: ${pcScore}分, 玩家: ${playerScore}分`)
+    </script>
+</body>
+
+</html>
