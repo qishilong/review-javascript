@@ -265,3 +265,12 @@ var MyFunctions = {
     }
 }
 
+
+let arr = [1, 2, 31, 2, 3, 1, 2, 3, 2, 4, 5, 3, 5, 3, 3, 2, 2];
+MyFunctions.sort(arr, (a, b) => {
+    console.log(b, a, b - a)
+    return b - a
+})
+
+console.log(arr)
+
