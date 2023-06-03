@@ -16,21 +16,22 @@
         const body = document.getElementsByTagName('body')[0];
         const frag = document.createDocumentFragment();
 
+        const createImg = (src) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.style.margin = '30px';
+            frag.appendChild(img);
+        }
+
         // 方法一
         for (let i = 1; i <= 13; i++) {
             for (let j = 1; j <= 4; j++) {
-                const img = document.createElement('img');
-                img.src = `pokers/${i}_${j}.jpg`;
-                img.style.margin = '30px'
-                frag.appendChild(img)
+                createImg(`pokers/${i}_${j}.jpg`)
             }
         }
 
         for (let n = 14; n < 16; n++) {
-            const img = document.createElement('img');
-            img.src = `pokers/${n}_${1}.jpg`
-            img.style.margin = '30px'
-            frag.appendChild(img)
+            createImg(`pokers/${n}_${1}.jpg`)
         }
 
         // 方法二
@@ -42,17 +43,10 @@
         //     if (n > 4) {
         //         n = 1
         //     }
-
-        //     const img = document.createElement('img');
-        //     img.src = `pokers/${j}_${n}.jpg`;
-        //     img.style.margin = '30px';
         //     if (i === 14 || i === 15) {
-        //         const img = document.createElement('img');
-        //         img.src = `pokers/${i}_${1}.jpg`;
-        //         img.style.margin = '30px';
-        //         frag.appendChild(img)
+        //         createImg(`pokers/${i}_${1}.jpg`)
         //     }
-        //     frag.appendChild(img)
+        //     createImg(`pokers/${j}_${n}.jpg`)
 
         //     j++;
         //     n++;
