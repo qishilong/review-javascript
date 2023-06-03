@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        .container{
+        .container {
             width: 200px;
             height: 200px;
             border: 2px solid;
@@ -14,12 +15,31 @@
         }
     </style>
 </head>
+
 <body>
     <p>
         点击div，设置div的背景色为随机颜色
     </p>
     <div class="container">
-    
+
     </div>
+
+    <script>
+        const container = document.getElementsByClassName('container')[0]
+
+        // 获取某个特定范围内的随机整数
+        const getIntRandom = (min, max) => {
+            return Math.floor(Math.random() * (max + 1 - min) + min);
+        }
+
+        // 获取某个特定范围内的随机数
+        const getRandom = (min, max) => {
+            return Math.random() * (max + 1 - min) + min;
+        }
+
+        container.onclick = () => container.style.backgroundColor = `rgba(${getIntRandom(0, 255)}, ${getIntRandom(0, 255)}, ${getIntRandom(0, 255)}, ${getRandom(0, 1)})`;
+
+    </script>
 </body>
+
 </html>
