@@ -25,7 +25,7 @@
 <body>
     <div class="container">
         <p>
-            <button>清空</button>
+            <button class='clear'>清空</button>
         </p>
         <ul class="list">
             <li>项目1<button>删除</button></li>
@@ -40,6 +40,24 @@
             <li>项目10<button>删除</button></li>
         </ul>
     </div>
+
+    <script>
+        const clearBtn = document.getElementsByClassName('clear')[0];
+        const ul = document.getElementsByClassName('list')[0];
+        const allBtn = ul.querySelectorAll('button');
+
+        clearBtn.onclick = () => {
+            ul.remove()
+        }
+
+        const length = allBtn.length;
+        for (let i = 0; i < length; i++) {
+            const btn = allBtn[i];
+            btn.onclick = function () {
+                btn.parentNode.remove();
+            }
+        }
+    </script>
 
 </body>
 
