@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        .container{
+        .container {
             overflow: hidden;
             border: 2px solid;
             width: 200px;
@@ -19,6 +20,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         袁
@@ -27,5 +29,29 @@
         <button>放大</button>
         <button>缩小</button>
     </p>
+
+    <script>
+        const amplificationBtn = document.getElementsByTagName('button')[0];
+        const lessenBtn = document.getElementsByTagName('button')[1];
+        const word = document.getElementsByClassName('container')[0];
+
+        amplificationBtn.onclick = () => {
+            // 得到当前字体的大小
+            const size = parseInt(getComputedStyle(word).fontSize)
+            word.style.fontSize = size + 10 + 'px';
+        }
+
+        lessenBtn.onclick = () => {
+            // 得到当前字体的大小
+            const size = parseInt(getComputedStyle(word).fontSize);
+            let result = size - 10;
+            if (result < 10) {
+                result = 10;
+            }
+            word.style.fontSize = result + 'px';
+        }
+
+    </script>
 </body>
+
 </html>
