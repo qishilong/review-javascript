@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        span{
+        span {
             min-width: 50px;
             display: inline-block;
             text-align: center;
@@ -14,21 +15,44 @@
         }
     </style>
 </head>
+
 <body>
-    <p>
+    <p class='text'>
         库存的最小值为0
     </p>
     <div>
         库存：
-        <button>-1000</button>
-        <button>-100</button>
-        <button>-10</button>
-        <button>-</button>
-        <span>0</span>
-        <button>+</button>
-        <button>+10</button>
-        <button>+100</button>
-        <button>+1000</button>
+        <button data-value='-1000'>-1000</button>
+        <button data-value='-100'>-100</button>
+        <button data-value='-10'>-10</button>
+        <button data-value='-1'>-</button>
+        <span class='show'>0</span>
+        <button data-value='1'>+</button>
+        <button data-value='10'>+10</button>
+        <button data-value='100'>+100</button>
+        <button data-value='1000'>+1000</button>
     </div>
+
+    <script>
+        const text = document.getElementsByClassName('text')[0];
+        const show = document.getElementsByClassName('show')[0];
+        const btns = document.querySelectorAll('button');
+        const length = btns.length;
+        for (let i = 0; i < length; i++) {
+            const btn = btns[i];
+            btn.onclick = function () { // 不能在此使用箭头函数，函数体中需要使用到 this
+                const value = parseInt(this.dataset.value);
+                const showValue = parseInt(show.innerText);
+                let current = showValue + value;
+                if (current < 0) {
+                    current = 0
+                }
+                show.innerText = current;
+                text.innerText = `库存的最小值为${current}`
+            }
+        }
+
+    </script>
 </body>
+
 </html>
