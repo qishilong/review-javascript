@@ -1,14 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <p>
         利用pokers文件夹中的图片，用纯JS生成图片依次排列到页面上。不允许使用样式表
     </p>
+    <script>
+        const body = document.getElementsByTagName('body')[0];
+        const frag = document.createDocumentFragment();
+
+        // 方法一
+        for (let i = 1; i <= 13; i++) {
+            for (let j = 1; j <= 4; j++) {
+                const img = document.createElement('img');
+                img.src = `pokers/${i}_${j}.jpg`;
+                img.style.margin = '30px'
+                frag.appendChild(img)
+            }
+        }
+
+        for (let n = 14; n < 16; n++) {
+            const img = document.createElement('img');
+            img.src = `pokers/${n}_${1}.jpg`
+            img.style.margin = '30px'
+            frag.appendChild(img)
+        }
+
+        // 方法二
+        // let i = 1, j = 1, n = 1;
+        // while (i <= 52) {
+        //     if (j > 13) {
+        //         j = 1
+        //     }
+        //     if (n > 4) {
+        //         n = 1
+        //     }
+
+        //     const img = document.createElement('img');
+        //     img.src = `pokers/${j}_${n}.jpg`;
+        //     img.style.margin = '30px';
+        //     if (i === 14 || i === 15) {
+        //         const img = document.createElement('img');
+        //         img.src = `pokers/${i}_${1}.jpg`;
+        //         img.style.margin = '30px';
+        //         frag.appendChild(img)
+        //     }
+        //     frag.appendChild(img)
+
+        //     j++;
+        //     n++;
+        //     i++;
+        // }
+
+        body.appendChild(frag);
+    </script>
 </body>
+
 </html>
