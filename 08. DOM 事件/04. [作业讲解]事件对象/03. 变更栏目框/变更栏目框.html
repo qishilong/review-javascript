@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>变更栏目框</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 390px;
+            height: 655px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        .top {
+            width: 100%;
+            height: 10%;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .content {
+            width: 100%;
+            height: 90%;
+        }
+
+        .top ul {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        li {
+            width: 25%;
+            height: 100%;
+            list-style: none;
+            text-align: center;
+            /* 将box-sizing设置为border-box，可以随意修改padding而不用修改盒子大小 */
+            box-sizing: border-box;
+            padding-top: 35px;
+            font-size: 18px;
+            color: #2c7bbb;
+            cursor: pointer;
+        }
+
+        li:hover {
+            color: #d32228;
+        }
+
+        .current {
+            border-bottom: 4px solid #d32228;
+            color: #d32228;
+        }
+
+        img {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="container">
+        <div class="top">
+            <ul>
+                <li class="current">电玩</li>
+                <li>网游</li>
+                <li>手游</li>
+                <li>数码</li>
+            </ul>
+        </div>
+        <div class="content">
+            <img src="./images/1.png" alt="" width="390">
+        </div>
+    </div>
+
+    <script>
+        const lis = document.getElementsByTagName('li');
+        const img = document.getElementsByTagName('img')[0];
+
+        const length = lis.length;
+        // 方法一
+        // for (let i = 0; i < length; i++) {
+        //     const li = lis[i];
+        //     li.onclick = () => {
+        //         const liCurrent = document.querySelector('li.current');
+        //         if (liCurrent) {
+        //             liCurrent.classList.remove('current');
+        //         }
+        //         li.classList.add('current');
+        //         img.src = `./images/${i + 1}.png`
+        //     }
+        // }
+
+        // 方法二
+        // Array.from(lis).forEach((item, index) => {
+        //     item.addEventListener('click', () => {
+        //         const liCurrent = document.querySelector('li.current');
+        //         if (liCurrent) {
+        //             liCurrent.classList.remove('current');
+        //         }
+        //         item.classList.add('current');
+        //         img.src = `./images/${index + 1}.png`;
+        //     })
+        // })
+    </script> -->
+
+    <!-- 方法三 -->
+    <div class="container">
+        <div class="top">
+            <ul>
+                <li class="current" data-src="./images/1.png">电玩</li>
+                <li data-src="./images/2.png">网游</li>
+                <li data-src="./images/3.png">手游</li>
+                <li data-src="./images/4.png">数码</li>
+            </ul>
+        </div>
+        <div class="content">
+            <img src="./images/1.png" alt="" width="390">
+        </div>
+    </div>
+
+    <script>
+        // 事件委托
+        const ul = document.querySelector('.container .top ul');
+        const img = document.querySelector('img');
+
+        ul.addEventListener('click', (e) => {
+            if (e.target.dataset.src) {
+                const li = document.querySelector('li.current')
+                if (li) {
+                    li.classList.remove('current');
+                }
+                e.target.classList.add('current');
+                img.src = e.target.dataset.src;
+            }
+        })
+    </script>
+</body>
+
+</html>

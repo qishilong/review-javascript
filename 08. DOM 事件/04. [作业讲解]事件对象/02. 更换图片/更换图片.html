@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 方法一 -->
+    <!-- <button>第1张图片</button>
+    <button>第2张图片</button>
+    <button>第3张图片</button>
+    <button>第4张图片</button>
+    <div style="margin-top:20px;">
+        <img src="img/1.jpg" alt="" id="imgShow" width="250" height="250">
+    </div>
+
+    <script>
+        const button = document.getElementsByTagName('button');
+        const img = document.getElementsByTagName('img')[0]
+        const length = button.length;
+        for (let i = 0; i < length; i++) {
+            button[i].onclick = () => {
+                img.src = `img/${i + 1}.jpg`;
+            }
+        }
+    </script> -->
+
+    <!-- 方法二 -->
+    <button onclick='btnOnclick(1)'>第1张图片</button>
+    <button onclick='btnOnclick(2)'>第2张图片</button>
+    <button onclick='btnOnclick(3)'>第3张图片</button>
+    <button onclick='btnOnclick(4)'>第4张图片</button>
+    <div style="margin-top:20px;">
+        <img src="img/1.jpg" alt="" id="imgShow" width="250" height="250">
+    </div>
+
+    <script>
+        const img = document.getElementsByTagName('img')[0];
+        const btnOnclick = (i) => {
+            img.src = `img/${i}.jpg`
+        }
+    </script>
+</body>
+
+</html>
