@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .wrap {
+            width: 120px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 25px;
+        }
+
+        .title {
+            background-color: tomato;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="wrap" id="wrap">
+        <dl>
+            <dt class="title" _id="0">菜单一</dt>
+            <dd>
+                <p>商品一</p>
+                <p>商品二</p>
+                <p>商品三</p>
+                <p>商品四</p>
+            </dd>
+        </dl>
+        <dl>
+            <dt class="title" _id="1">菜单二</dt>
+            <dd>
+                <p>商品一</p>
+                <p>商品二</p>
+                <p>商品三</p>
+                <p>商品四</p>
+            </dd>
+        </dl>
+        <dl>
+            <dt class="title" _id="2">菜单三</dt>
+            <dd>
+                <p>商品一</p>
+                <p>商品二</p>
+                <p>商品三</p>
+                <p>商品四</p>
+            </dd>
+        </dl>
+    </div> -->
+
+    <div class="wrapper">
+        <ul class="menu">
+
+        </ul>
+    </div>
+
+    <!-- <script src="./index.js"></script> -->
+
+    <script>
+        const ul = document.getElementsByClassName('menu')[0];
+
+        const menu = [
+            {
+                name: "菜单一",
+                children: ["商品一", "商品二", "商品三", "商品四"]
+            },
+            {
+                name: "菜单二",
+                children: ["商品一", "商品二", "商品三", "商品四"]
+            },
+            {
+                name: "菜单三",
+                children: ["商品一", "商品二", "商品三", "商品四"]
+            }
+        ];
+
+        menu.forEach((item) => {
+            const li = document.createElement('li');
+            li.innerHTML = `<span class='title'>${item.name}</span>`;
+
+            const ulChild = document.createElement('ul');
+            item.children.forEach(itemChild => {
+                ulChild.innerHTML += `<li>${itemChild}</li>`;
+            })
+            li.appendChild(ulChild);
+            ul.appendChild(li);
+        })
+
+        ul.addEventListener('click', (e) => {
+            if (e.target.className === 'title') {
+                const nextUl = e.target.nextElementSibling;
+                const style = getComputedStyle(nextUl);
+                if (style.display === 'none') {
+                    nextUl.style.display = 'block';
+                } else {
+                    nextUl.style.display = 'none';
+                }
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>
