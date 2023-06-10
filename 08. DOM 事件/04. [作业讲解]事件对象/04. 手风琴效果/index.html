@@ -80,6 +80,8 @@
             }
         ];
 
+        const fragElement = document.createDocumentFragment();
+
         menu.forEach((item) => {
             const li = document.createElement('li');
             li.innerHTML = `<span class='title'>${item.name}</span>`;
@@ -88,9 +90,11 @@
             item.children.forEach(itemChild => {
                 ulChild.innerHTML += `<li>${itemChild}</li>`;
             })
+            fragElement.appendChild(li);
             li.appendChild(ulChild);
-            ul.appendChild(li);
         })
+
+        ul.appendChild(fragElement);
 
         ul.addEventListener('click', (e) => {
             if (e.target.className === 'title') {
