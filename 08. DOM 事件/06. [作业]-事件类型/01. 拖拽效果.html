@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            background-color: #abc;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+
+    <script>
+        // 方法一
+        // const div = document.getElementsByTagName('div')[0];
+        // const divStyle = getComputedStyle(div);
+        // let divLeft = parseFloat(divStyle.left),
+        //     divTop = parseFloat(divStyle.top);
+        // div.onmousedown = (e) => {
+        //     if (e.button !== 0) {
+        //         return;
+        //     }
+        //     window.onmousemove = (e) => {
+        //         divLeft += e.movementX;
+        //         divTop += e.movementY;
+        //         div.style.left = divLeft + 'px';
+        //         div.style.top = divTop + 'px';
+        //     }
+        //     window.onmouseup = window.onmouseleave = (e) => {
+        //         if (e.button === 0) {
+        //             window.onmousemove = null; // 移除 div 鼠标移动事件
+        //         }
+        //     }
+        // }
+
+
+        // 方法二
+        const div = document.querySelector('div');
+        div.onmousedown = (e) => {
+            if (e.button !== 0) {
+                return;
+            }
+            const divStyle = getComputedStyle(div);
+            let divLeft = parseFloat(divStyle.left);
+            let divTop = parseFloat(divStyle.top);
+            let pageY = e.pageY;
+            let pageX = e.pageX;
+            window.onmousemove = (e) => {
+                const disX = e.pageX - pageX;
+                const disY = e.pageY - pageY;
+                div.style.left = divLeft + disX + 'px';
+                div.style.top = divTop + disY + 'px';
+            }
+            window.onmouseleave = window.onmouseup = (e) => {
+                if (e.button === 0) {
+                    window.onmousemove = null;  // 移除鼠标移动事件
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
