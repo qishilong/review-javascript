@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .left {
+            float: left;
+            margin-right: 30px;
+            line-height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='empty' class='left'>
+        <img src="./images/empty.png" alt="">
+        <img src="./images/empty.png" alt="">
+        <img src="./images/empty.png" alt="">
+        <img src="./images/empty.png" alt="">
+        <img src="./images/empty.png" alt="">
+    </div>
+    <div id='star' class='left'></div>
+
+    <script>
+        const empty = document.getElementById('empty');
+        const star = document.getElementById('star');
+        const children = empty.children;
+        const length = children.length;
+
+        const evaluateArray = ['很不满意', '不满意', '一般', '满意', '很满意'];
+        let starIndex = -1;  // 记录点击的是第几个星，考虑到没有点击的情况，坐标从 -1 开始
+
+
+        empty.onmouseover = (e) => {
+            if (e.target.tagName === 'IMG') {
+                e.target.src = './images/star.png';
+                // 处理当前 img 元素之前的
+                let prev = e.target.previousElementSibling;
+                while (prev) {
+                    prev.src = './images/star.png'
+                    prev = prev.previousElementSibling;
+                }
+
+                // 处理当前 img 元素之后的
+                let next = e.target.nextElementSibling;
+                while (next) {
+                    next.src = './images/empty.png';
+                    next = next.nextElementSibling;
+                }
+
+                // 处理文字
+                const index = Array.from(children).indexOf(e.target);
+                star.innerText = evaluateArray[index];
+            }
+        }
+
+        empty.onclick = (e) => {
+            if (e.target.tagName === 'IMG') {
+                starIndex = Array.from(children).indexOf(e.target)
+            }
+        }
+
+        empty.onmouseleave = (e) => {
+            star.innerText = evaluateArray[starIndex] || '';
+            for (let i = 0; i < length; i++) {
+                if (i <= starIndex) {
+                    children[i].src = './images/star.png';
+                } else {
+                    children[i].src = './images/empty.png'
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
