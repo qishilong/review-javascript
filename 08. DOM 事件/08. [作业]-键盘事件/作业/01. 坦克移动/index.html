@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./imgs/tankU.gif" alt="">
+
+    <script>
+        const img = document.querySelector('img');
+        const imgStyle = getComputedStyle(img)
+        let imgTop = parseFloat(imgStyle.top);
+        let imgLeft = parseFloat(imgStyle.left);
+        document.onkeydown = (e) => {
+            switch (e.key) {
+                case 'ArrowUp':
+                    img.src = './imgs/tankU.gif';
+                    move('up', e.shiftKey)
+                    break;
+                case 'ArrowRight':
+                    img.src = './imgs/tankR.gif';
+                    move('right', e.shiftKey)
+                    break;
+                case 'ArrowDown':
+                    img.src = './imgs/tankD.gif';
+                    move('down', e.shiftKey)
+                    break;
+                case 'ArrowLeft':
+                    img.src = './imgs/tankL.gif';
+                    move('left', e.shiftKey)
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        const move = (direction, isShift) => {
+            switch (direction) {
+                case 'down':
+                    imgTop += isShift ? 20 : 5;
+                    img.style.top = imgTop + 'px';
+                    break;
+                case 'up':
+                    imgTop -= isShift ? 20 : 5;
+                    if (imgTop < 0) {
+                        imgTop = 0
+                    };
+                    img.style.top = imgTop + 'px';
+                    break;
+                case 'left':
+                    imgLeft -= isShift ? 20 : 5;
+                    if (imgLeft < 0) {
+                        imgLeft = 0
+                    }
+                    img.style.left = imgLeft + 'px';
+                    break;
+                case 'right':
+                    imgLeft += isShift ? 20 : 5;
+                    img.style.left = imgLeft + 'px';
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
+</body>
+
+</html>
