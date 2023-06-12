@@ -1,0 +1,27 @@
+.normal {
+    width: 350px;
+    height: 350px;
+    border: 1px solid #ccc;
+    float: left;
+    position: relative;
+    background-clip: padding-box;
+}
+
+.enlargement {
+    width: 540px;
+    height: 540px;
+    border: 1px solid #ccc;
+    float: left;
+    margin-left: 10px;
+    background-clip: padding-box;
+    display: none;
+}
+
+.container {
+    position: absolute;
+    background: rgba(200, 200, 50, 0.5);
+    border: 1px solid #999;
+    box-sizing: border-box;
+    cursor: move;
+    display: none;
+}
