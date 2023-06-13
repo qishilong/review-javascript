@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container-menu {
+            width: 200px;
+            height: 300px;
+            border: 1px solid #abc;
+            background-color: #fff;
+            box-sizing: border-box;
+            position: fixed;
+            display: none;
+        }
+
+        ul {
+            height: 100%;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            height: 60px;
+            width: 60px;
+            text-align: center;
+            line-height: 60px;
+        }
+
+        .container1 {
+            width: 400px;
+            height: 400px;
+            float: left;
+            background-color: #acb;
+        }
+
+        .container2 {
+            width: 400px;
+            height: 400px;
+            float: right;
+            background-color: #cab;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container1"></div>
+    <div class="container2"></div>
+    <div class='container-menu'>
+        <ul>
+            <li>菜单1</li>
+            <li>菜单2</li>
+            <li>菜单3</li>
+            <li>菜单4</li>
+            <li>菜单5</li>
+        </ul>
+    </div>
+
+    <script>
+        const container1 = document.querySelector('.container1');
+        const container2 = document.querySelector('.container2');
+        const containerMenu = document.querySelector('.container-menu');
+
+        container1.oncontextmenu = container2.oncontextmenu = (e) => {
+            e.preventDefault();
+            containerMenu.style.display = 'block';
+            containerMenu.style.top = e.clientY + 'px';
+            containerMenu.style.left = e.clientX + 'px';
+        }
+
+        window.onmousedown = () => {
+            containerMenu.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
