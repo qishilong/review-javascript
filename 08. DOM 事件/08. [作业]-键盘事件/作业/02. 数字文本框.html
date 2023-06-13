@@ -12,37 +12,19 @@
     <input type="text">
     <script>
         // 制作一个只能书写整数的文本框，必须使用type=text的文本框
-        // const input = document.querySelector('input');
-        // let sign = false, decimalPoint = false
-        // input.onkeypress = (e) => {
-        //     const code = e.key[0].charCodeAt(0);
-        //     console.log(code)
-        //     if (sign) {
-        //         if (code <= 43 || code > 57 || code === 44 || code === 47 || code === 45) {
-        //             e.preventDefault();
-        //         }
-        //     } else if (decimalPoint) {
-        //         console.log(1)
-        //         if (code < 43 || code > 57 || code === 44 || code === 47 || code === 46) {
-        //             e.preventDefault();
-        //         }
-        //     } else {
-        //         if (code < 43 || code > 57 || code === 44 || code === 47) {
-        //             e.preventDefault();
-        //         }
-        //     }
-        //     if (code === 43 || code === 45) {
-        //         sign = true;
-        //     }
-        //     if (code === 46) {
-        //         decimalPoint = true;
-        //     }
-        // }
 
         const input = document.querySelector('input');
         input.onkeypress = (e) => {
             const code = e.key[0].charCodeAt(0);
+            console.log(code)
             if (code < 48 || code > 57) {
+                e.preventDefault();
+            }
+        }
+
+        input.onpaste = function (e) {
+            var text = e.clipboardData.getData("text/plain");
+            if (!text || !/\d+/.test(text)) {
                 e.preventDefault();
             }
         }
