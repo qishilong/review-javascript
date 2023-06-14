@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            height: 200px;
+            font-size: 50px;
+            margin: 0 auto;
+            /* position: absolute;
+            top: calc(50% - 100px);
+            left: calc(50% - 300px); */
+            position: relative;
+            top: 100px;
+            text-align: center;
+            line-height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock"></div>
+    <script>
+        const div = document.querySelector('div');
+        setInterval(() => {
+            const date = new Date();
+            const year = date.getFullYear();
+            div.innerText = `${date.getFullYear()} 年 ${date.getMonth() + 1} 月 ${date.getDate()} 日 ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`
+        }, 1000);
+    </script>
+</body>
+
+</html>
