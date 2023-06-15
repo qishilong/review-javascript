@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+            color: #8888AAAA;
+        }
+
+        p {
+            font-size: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        倒计时：<span id="clock">2</span>
+    </p>
+    <p>
+        点击数：<span id="num">0</span>
+    </p>
+    <p>
+        <button id="click">点击</button>
+        <button id="reset">重置</button>
+    </p>
+    <script>
+        const clickBtn = document.getElementById('click');
+        const resetBtn = document.getElementById('reset');
+        const clock = document.getElementById('clock');
+        const num = document.getElementById('num');
+        const countDown = Number(clock.innerText);
+        const clickNum = Number(num.innerText);
+        let showCountDown = countDown;
+        let showClickNum = clickNum;
+        let timeId = null;
+        let isOver = false;
+
+        clickBtn.onclick = () => {
+            if (showClickNum === 0) {
+                startTime()
+            }
+            if (!isOver) {
+                setClickNum(showClickNum + 1)
+            }
+        }
+
+        resetBtn.onclick = () => {
+            num.innerText = clickNum;
+            clock.innerText = countDown;
+            showCountDown = countDown;
+            showClickNum = clickNum
+            isOver = false;
+        }
+
+        const setClickNum = (n) => {
+            showClickNum = n;
+            num.innerText = showClickNum;
+        }
+
+
+        // 开启一个计时器
+        const startTime = () => {
+            if (timeId) {
+                return;
+            }
+            timeId = setInterval(() => {
+                showCountDown--;
+                clock.innerText = showCountDown;
+                if (showCountDown === 0) {
+                    clearInterval(timeId);
+                    timeId = null;
+                    isOver = true;
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
