@@ -37,7 +37,6 @@ class Slideshow {
         this.style = style;
         this.timer = timer;
         this.currentIndex = currentIndex;
-        this.autoTimer = null;  // 自动移动的计时器 id
         this.autoTimer = autoTimer;
         // 总距离
         this.totalWidth = this.imgNumber * this.imgWidth;
