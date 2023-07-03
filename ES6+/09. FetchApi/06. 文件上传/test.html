@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type='file' id="upload">
+  <img src="" alt="" id='image'>
+  <button id='button'>上传</button>
+
+  <script>
+    const input = document.getElementById('upload');
+    const image = document.getElementById('image')
+    const button = document.getElementById('button');
+
+    const upload = async () => {
+      const url = 'http://study.yuanjin.tech/api/upload';
+      const formData = new FormData();  // 构建请求体
+      if (input.files.length === 0) {
+        alert('请选择要上传的文件');
+        return;
+      }
+      formData.append('imagefile', input.files[0]);
+      const res = await fetch(url, {
+        method: 'POST',
+        body: formData, // 自动修改请求头
+      })
+      const result = await res.json();
+      return result;
+    }
+
+    button.onclick = async () => {
+      const result = await upload();
+      image.src = result.path;
+    }
+
+  </script>
+</body>
+
+</html>
