@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <script>
+        // 创建一个观察者
+        // 使用 Proxy
+        const observer = (target) => {
+            const container = document.getElementById('container');
+            const proxy = new Proxy(target, {
+                get(target, prop) {
+                    return Reflect.get(target, prop);
+                },
+                set(target, prop, newValue) {
+                    Reflect.set(target, prop, newValue);
+                    render();
+                },
+                deleteProperty(target, prop) {
+                    Reflect.deleteProperty(target, prop);
+                    render();
+                }
+            })
+
+            const render = () => {
+                const props = Object.keys(target)
+                let html = '';
+                for (const item of props) {
+                    html += `<p><span>${item}: </span><span>${target[item]}</span></p>`
+                }
+                container.innerHTML = html;
+            }
+
+            render();
+            return proxy;
+        }
+
+        const target = {
+            a: 1,
+            b: 2
+        }
+        const proxy = observer(target);
+    </script>
+</body>
+
+</html>

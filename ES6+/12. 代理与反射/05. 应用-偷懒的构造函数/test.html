@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class User {
+
+        }
+
+        const constructorProxy = (Class, ...propsName) => {
+            return new Proxy(Class, {
+                construct(target, argumentsList) {
+                    // console.log(argumentsList, 11)
+                    const obj = Reflect.construct(target, argumentsList);
+                    // console.log(obj, 22)
+                    propsName.forEach((item, i) => {
+                        obj[item] = argumentsList[i];
+                    })
+                    return obj;
+                }
+            })
+        }
+
+        const UserProxy = constructorProxy(User, 'firstName', 'lastName', 'age');
+        // console.log(UserProxy, 33)
+
+        const obj = new UserProxy('戚', '世龙', '18');
+        // console.log(obj, 44)
+
+        class Monster {
+
+        }
+
+        const MonsterProxy = constructorProxy(Monster, "attack", "defence", "hp", "rate", "name")
+
+        const m = new MonsterProxy(10, 20, 100, 30, "怪物")
+        // console.log(m);
+    </script>
+</body>
+
+</html>

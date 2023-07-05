@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <script>
+        // 创建一个观察者
+        // 使用 Object.defineProperty
+        const observer = (target) => {
+            const container = document.getElementById('container');
+            const props = Object.keys(target);
+            const obj = {};
+            for (const item of props) {
+                Object.defineProperty(obj, item, {
+                    get() {
+                        return target[item]
+                    },
+                    set(value) {
+                        target[item] = value;
+                        render();
+                    },
+                    enumerable: true,
+                })
+            }
+            const render = () => {
+                let html = '';
+                for (const item of Object.keys(obj)) {
+                    html += `<p><span>${item}: </span><span>${obj[item]}</span></p>`
+                }
+                container.innerHTML = html;
+            }
+
+            render();
+            return obj;
+        }
+
+        const target = {
+            a: 1,
+            b: 2
+        }
+        const obj = observer(target);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 使用 Proxy 代理
+        const sum = (a, b) => {
+            return a + b;
+        }
+
+        const validatorFunction = (func, ...args) => {
+            const proxy = new Proxy(func, {
+                apply(target, thisArg, argArray) {
+                    args.forEach((item, i) => {
+                        if (typeof argArray[i] !== item) {
+                            throw new TypeError(`第 ${i + 1} 个参数 ${argArray[i]} 不满足类型 ${item}`)
+                        }
+                    })
+                    return Reflect.apply(target, thisArg, argArray);
+                }
+            })
+            return proxy;
+        }
+
+        const validatorSum = validatorFunction(sum, 'number', 'number');
+
+        console.log(validatorSum(1, 2));
+    </script>
+</body>
+
+</html>
